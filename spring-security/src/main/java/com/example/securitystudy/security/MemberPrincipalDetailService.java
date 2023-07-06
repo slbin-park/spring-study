@@ -2,6 +2,7 @@ package com.example.securitystudy.security;
 
 import com.example.securitystudy.repository.MemberRepository;
 import com.example.securitystudy.repository.entity.Member;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -9,9 +10,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class MemberPrincipalDetailService implements UserDetailsService {
 
-    @Autowired
     private MemberRepository memberRepository;
 
     @Override

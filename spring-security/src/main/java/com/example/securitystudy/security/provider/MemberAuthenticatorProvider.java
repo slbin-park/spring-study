@@ -1,8 +1,9 @@
+package security1.security.provider;
+
 import com.example.securitystudy.repository.entity.Member;
 import com.example.securitystudy.security.MemberPrincipalDetailService;
 import com.example.securitystudy.security.MemberPrincipalDetails;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -13,13 +14,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+
 @Component
-@NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 // AuthenticationProvider 를 구현한 클래스
 public class MemberAuthenticatorProvider implements AuthenticationProvider {
 
-    @Autowired
     private MemberPrincipalDetailService memberPrincipalDetailService;
 
     @Override

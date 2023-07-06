@@ -12,9 +12,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-@Getter
-@Setter
 @AllArgsConstructor
+@Getter
 public class MemberPrincipalDetails implements UserDetails {
 
     private final Member member;
