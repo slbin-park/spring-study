@@ -1,5 +1,6 @@
 package com.example.jpastudy;
 
+import jakarta.persistence.EntityTransaction;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
