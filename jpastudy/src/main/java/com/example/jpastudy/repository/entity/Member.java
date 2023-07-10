@@ -17,6 +17,9 @@ public class Member {
     @Column(name = "NAME",nullable = false)
     private String username;
 
+    @ManyToOne
+    private Team team;
+
     private Integer age;
 
 }
