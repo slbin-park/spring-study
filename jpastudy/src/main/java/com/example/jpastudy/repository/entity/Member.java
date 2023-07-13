@@ -3,15 +3,16 @@ package com.example.jpastudy.repository.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="MEMBER")
 public class Member {
     @Id
-    @Column
+    @Column(name = "MEMEBER_ID")
     private String id;
 
     @Column(name = "NAME",nullable = false)
@@ -19,6 +20,9 @@ public class Member {
 
     @ManyToOne
     private Team team;
+
+    @OneToMany(mappedBy = "member")
+    private List<Product> products;
 
     private Integer age;
 
