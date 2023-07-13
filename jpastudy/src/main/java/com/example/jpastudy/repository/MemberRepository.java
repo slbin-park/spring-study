@@ -1,4 +1,7 @@
 package com.example.jpastudy.repository;
 
-public class MemberRepository {
+import com.example.jpastudy.repository.entity.Member;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface MemberRepository extends JpaRepository<Member,Long> {
 }
