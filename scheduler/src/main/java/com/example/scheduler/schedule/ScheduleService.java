@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import org.quartz.JobBuilder;
+import org.quartz.JobDataMap;
 import org.quartz.JobDetail;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobKey;
@@ -23,15 +24,32 @@ public class ScheduleService {
   private final Scheduler scheduler;
 
   public void schedulerOneTimeJob(Date date) throws SchedulerException {
-    JobDetail jobDetail = builJobDeatil();
+    JobDetail jobDetail = buildJobDeatil();
     Trigger trigger = buildOneTimeJobTrigger(jobDetail, date);
     scheduler.scheduleJob(jobDetail, trigger);
   }
 
-  private JobDetail builJobDeatil() {
+  public void schedulerOneTimeJob(Date date, CreateScheduleRequest createScheduleRequest)
+      throws SchedulerException {
+    JobDetail jobDetail = buildJobDeatil(createScheduleRequest);
+    Trigger trigger = buildOneTimeJobTrigger(jobDetail, date);
+    scheduler.scheduleJob(jobDetail, trigger);
+  }
+
+  private JobDetail buildJobDeatil() {
     return JobBuilder.newJob(PrintJob.class)
         .withIdentity(UUID.randomUUID().toString(), "group-name")
         .withDescription("생성된 JOB")
+        .build();
+  }
+
+  private JobDetail buildJobDeatil(CreateScheduleRequest createScheduleRequest) {
+    JobDataMap jobDataMap = new JobDataMap();
+    jobDataMap.put("title", createScheduleRequest.getJobName());
+    return JobBuilder.newJob(PrintJob.class)
+        .withIdentity(UUID.randomUUID().toString(), "group-name")
+        .withDescription("생성된 JOB")
+        .usingJobData(jobDataMap)
         .build();
   }
 
@@ -55,6 +73,7 @@ public class ScheduleService {
   public void printAllJobs() throws SchedulerException {
     for (String groupName : scheduler.getJobGroupNames()) {
       for (JobKey jobKey : scheduler.getJobKeys(GroupMatcher.jobGroupEquals(groupName))) {
+        System.out.println(jobKey.toString());
         System.out.println(
             "Job name: " + jobKey.getName() + ", Group: " + jobKey.getGroup());
       }
