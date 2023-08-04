@@ -25,6 +25,7 @@ public class SecurityConfig {
                                 .requestMatchers("/login").permitAll()
                                 .anyRequest().authenticated()
                 )
+
                 .httpBasic(Customizer.withDefaults())
                 .build();
     }
